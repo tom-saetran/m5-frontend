@@ -3,7 +3,6 @@ import "react-quill/dist/quill.snow.css"
 import ReactQuill from "react-quill"
 import { Container, Form, Button, Col, Row } from "react-bootstrap"
 import "./styles.css"
-import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider"
 
 export default class NewBlogPost extends Component {
     state = {
