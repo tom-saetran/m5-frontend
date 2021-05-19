@@ -3,6 +3,7 @@ import "react-quill/dist/quill.snow.css"
 import ReactQuill from "react-quill"
 import { Container, Form, Button, Col, Row } from "react-bootstrap"
 import "./styles.css"
+import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider"
 
 export default class NewBlogPost extends Component {
     state = {
@@ -25,8 +26,8 @@ export default class NewBlogPost extends Component {
 
     submit = async e => {
         e.preventDefault()
-
-        console.log(await this.props.post(this.state))
+        let response = await this.props.post(this.state)
+        response && this.props.history.push("blog/" + (await response._id))
     }
 
     render() {

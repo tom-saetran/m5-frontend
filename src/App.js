@@ -60,7 +60,7 @@ class App extends React.Component {
                     body: JSON.stringify(data)
                 })
                 if (!results.ok) throw new Error("got data in return but the ok flag is not true! response: " + results)
-                if (!results.status !== 201) return false
+                if (results.status !== 201) return false
                 results = await results.json()
             } catch (error) {
                 console.error(error)

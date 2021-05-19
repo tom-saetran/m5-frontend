@@ -7,9 +7,9 @@ export default class BlogList extends Component {
         return (
             <Row>
                 {this.props.blogPosts &&
-                    this.props.blogPosts.map(post => (
-                        <Col md={4} style={{ marginBottom: 50 }}>
-                            <BlogItem key={post.title} {...post} />
+                    this.props.blogPosts.map((post, index) => (
+                        <Col md={4} key={index} style={{ marginBottom: 50 }}>
+                            <BlogItem {...post} />
                         </Col>
                     ))}
             </Row>
