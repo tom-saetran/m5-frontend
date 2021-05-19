@@ -10,8 +10,8 @@ export default class NewBlogPost extends Component {
         category: "Category 1",
         content: "",
         readTime: {
-            value: 0,
-            unit: ""
+            value: 1,
+            unit: "minutes"
         },
         cover: ""
     }
@@ -20,12 +20,13 @@ export default class NewBlogPost extends Component {
     changeCategory = e => this.setState({ category: e.target.value })
     changeContent = value => this.setState({ content: value })
     changeCover = e => this.setState({ cover: e.target.value })
-    changeReadTimeNumber = e => this.setState({ readTime: { value: e.target.value, unit: this.state.readTime.unit } })
-    changeReadTimeUnit = e => this.setState({ readTime: { unit: e.target.value, value: this.state.readTime.value } })
+    changeReadTimeNumber = e => this.setState({ readTime: { value: parseInt(e.target.value), unit: this.state.readTime.unit } })
+    changeReadTimeUnit = e => this.setState({ readTime: { unit: e.target.value, value: 1 } })
 
-    submit = e => {
+    submit = async e => {
         e.preventDefault()
-        this.props.post(this.state)
+
+        console.log(await this.props.post(this.state))
     }
 
     render() {
@@ -40,7 +41,28 @@ export default class NewBlogPost extends Component {
                         <Form.Label>Time to read</Form.Label>
                         <Row className="align-items-center">
                             <Col xs={6} sm={5} md={3} lg={2}>
-                                <Form.Control value={this.state.readTime.value} onChange={e => this.changeReadTimeNumber(e)} size="lg" type="number" />
+                                {this.state.readTime.unit === "minutes" ? (
+                                    <Form.Control value={this.state.readTime.value} onChange={e => this.changeReadTimeNumber(e)} size="lg" as="select">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>5</option>
+                                        <option>10</option>
+                                        <option>15</option>
+                                        <option>20</option>
+                                        <option>30</option>
+                                        <option>40</option>
+                                        <option>50</option>
+                                    </Form.Control>
+                                ) : (
+                                    <Form.Control value={this.state.readTime.value} onChange={e => this.changeReadTimeNumber(e)} size="lg" as="select">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option value="5">5+</option>
+                                    </Form.Control>
+                                )}
                             </Col>
                             <Col>
                                 <Form.Control onChange={e => this.changeReadTimeUnit(e)} size="lg" as="select">
