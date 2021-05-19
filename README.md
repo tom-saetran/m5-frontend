@@ -1,1 +1,3 @@
-# Strive Blog Template
+# M5 - frontend
+
+Hello world!
