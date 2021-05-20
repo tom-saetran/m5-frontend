@@ -10,12 +10,7 @@ const Router = process.env.NODE_ENV === "production" ? HashRouter : BrowserRoute
 
 class App extends React.Component {
     state = {
-        endpoint: "http://localhost:8888/blogposts/",
-        blogPosts: null
-    }
-
-    componentDidMount = async () => {
-        this.setState({ blogPosts: await this.crud.getAll() })
+        endpoint: "http://localhost:8888/blogposts/"
     }
 
     crud = {
@@ -30,7 +25,6 @@ class App extends React.Component {
                 console.error(error)
                 return null
             }
-            console.log(results)
             return await results
         },
 
@@ -44,7 +38,6 @@ class App extends React.Component {
                 console.error(error)
                 return null
             }
-            console.log(results)
             return await results
         },
 
@@ -111,7 +104,7 @@ class App extends React.Component {
         return (
             <Router basename="/">
                 <NavBar />
-                <Route render={routeProps => <Home {...routeProps} blogPosts={this.state.blogPosts} />} exact path="/" />
+                <Route render={routeProps => <Home {...routeProps} crud={this.crud} />} exact path="/" />
                 <Route render={routeProps => <Blog {...routeProps} get={id => this.crud.get(id)} />} exact path="/blog/:id" />
                 <Route render={routeProps => <NewBlogPost {...routeProps} post={data => this.crud.post(data)} />} exact path="/new" />
                 <Footer />

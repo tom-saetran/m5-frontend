@@ -4,11 +4,13 @@ import BlogList from "../../components/blog/blog-list"
 import "./styles.css"
 
 export default class Home extends Component {
+    posts = async () => await this.props.crud.getAll()
+
     render() {
         return (
             <Container fluid="sm">
                 <h1 className="blog-main-title">Welcome to the Strive Blog!</h1>
-                <BlogList blogPosts={this.props.blogPosts} />
+                <BlogList crud={this.props.crud} />
             </Container>
         )
     }
