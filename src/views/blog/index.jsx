@@ -5,8 +5,7 @@ import BlogAuthor from "../../components/blog/blog-author"
 import "./styles.css"
 class Blog extends Component {
     state = {
-        blog: null,
-        loading: true
+        blog: null
     }
 
     componentDidMount = async () => {
