@@ -13,13 +13,15 @@ export default class NewBlogPost extends Component {
             value: 1,
             unit: "minutes"
         },
-        cover: ""
+        cover: "",
+        coverFile: null
     }
 
     changeTitle = e => this.setState({ title: e.target.value })
     changeCategory = e => this.setState({ category: e.target.value })
     changeContent = value => this.setState({ content: value })
     changeCover = e => this.setState({ cover: e.target.value })
+    changeCoverFile = e => this.setState({ coverFile: e.target.files[0] })
     changeReadTimeNumber = e => this.setState({ readTime: { value: parseInt(e.target.value), unit: this.state.readTime.unit } })
     changeReadTimeUnit = e => this.setState({ readTime: { unit: e.target.value, value: 1 } })
 
@@ -34,15 +36,15 @@ export default class NewBlogPost extends Component {
             <Container className="new-blog-container">
                 <Form className="mt-5" onSubmit={e => this.submit(e)}>
                     <Form.Group controlId="blog-form" className="mt-3">
-                        <Form.Label>Title</Form.Label>
-                        <Form.Control value={this.state.title} onChange={e => this.changeTitle(e)} size="lg" placeholder="Title" />
+                        <Form.Label>Title *</Form.Label>
+                        <Form.Control required value={this.state.title} onChange={e => this.changeTitle(e)} size="lg" placeholder="Title" />
                     </Form.Group>
                     <Form.Group controlId="blog-readtime" className="mt-3">
-                        <Form.Label>Time to read</Form.Label>
+                        <Form.Label>Time to read *</Form.Label>
                         <Row className="align-items-center">
                             <Col xs={6} sm={5} md={3} lg={2}>
-                                {this.state.readTime.unit === "minutes" ? (
-                                    <Form.Control value={this.state.readTime.value} onChange={e => this.changeReadTimeNumber(e)} size="lg" as="select">
+                                {this.state.readTime.unit === "minute" ? (
+                                    <Form.Control required value={this.state.readTime.value} onChange={e => this.changeReadTimeNumber(e)} size="lg" as="select">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -55,7 +57,7 @@ export default class NewBlogPost extends Component {
                                         <option>50</option>
                                     </Form.Control>
                                 ) : (
-                                    <Form.Control value={this.state.readTime.value} onChange={e => this.changeReadTimeNumber(e)} size="lg" as="select">
+                                    <Form.Control required value={this.state.readTime.value} onChange={e => this.changeReadTimeNumber(e)} size="lg" as="select">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -65,29 +67,37 @@ export default class NewBlogPost extends Component {
                                 )}
                             </Col>
                             <Col>
-                                <Form.Control onChange={e => this.changeReadTimeUnit(e)} size="lg" as="select">
-                                    <option value="minutes">Minutes</option>
-                                    <option value="hours">Hours</option>
+                                <Form.Control required onChange={e => this.changeReadTimeUnit(e)} size="lg" as="select">
+                                    <option value="minute">Minutes</option>
+                                    <option value="hour">Hours</option>
                                 </Form.Control>
                             </Col>
                         </Row>
                     </Form.Group>
                     <Form.Group controlId="blog-category" className="mt-3">
-                        <Form.Label>Category</Form.Label>
-                        <Form.Control onChange={e => this.changeCategory(e)} size="lg" as="select" selected="category1">
-                            <option>Category 1</option>
-                            <option>Category 2</option>
-                            <option>Category 3</option>
-                            <option>Category 4</option>
-                            <option>Category 5</option>
+                        <Form.Label>Category *</Form.Label>
+                        <Form.Control required onChange={e => this.changeCategory(e)} size="lg" as="select" selected="category1">
+                            <option>Personal Blog</option>
+                            <option>Fake News</option>
+                            <option>Click Bait</option>
+                            <option>Propaganda</option>
+                            <option>Sponsored Content</option>
                         </Form.Control>
                     </Form.Group>
                     <Form.Group controlId="blog-category" className="mt-3">
-                        <Form.Label>Cover Image URL</Form.Label>
-                        <Form.Control value={this.state.cover} onChange={e => this.changeCover(e)} size="lg" type="input" />
+                        <Row>
+                            <Col xs={7}>
+                                <Form.Label>Cover Image URL</Form.Label>
+                                <Form.Control value={this.state.cover} onChange={e => this.changeCover(e)} size="lg" type="input" />
+                            </Col>
+                            <Col xs={5}>
+                                <Form.Label>or Upload...</Form.Label>
+                                <Form.Control onChange={e => this.changeCoverFile(e)} size="lg" type="file" />
+                            </Col>
+                        </Row>
                     </Form.Group>
                     <Form.Group controlId="blog-content" className="mt-3">
-                        <Form.Label>Blog Content</Form.Label>
+                        <Form.Label>Blog Content *</Form.Label>
                         <ReactQuill value={this.state.content} onChange={this.changeContent} className="new-blog-content" />
                     </Form.Group>
                     <Form.Group className="d-flex mt-3 justify-content-end">

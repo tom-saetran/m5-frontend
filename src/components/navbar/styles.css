@@ -18,3 +18,11 @@
     width: 160px;
     text-decoration: none;
 }
+
+.blog-navbar-sign-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 110px;
+    text-decoration: none;
+}

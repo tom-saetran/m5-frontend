@@ -1,6 +1,6 @@
 # Frontend Backlog
 
-1. creation, editing, deletion, listing of blog authors.
+1. creation, editing, deletion, listing of blog authors. (html done, not wired completely)
     > name  
     > surname  
     > email  
@@ -12,4 +12,3 @@
     > The user should be able to upload a picture as an avatar  
     > The user should be able to upload a picture as a blog post cover
 5. Post new comment on a blog post
-6. fix date formatting in blog posts

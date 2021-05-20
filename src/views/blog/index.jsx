@@ -25,8 +25,10 @@ class Blog extends Component {
                                 <BlogAuthor {...this.state.blog.author} />
                             </div>
                             <div className="blog-details-info">
-                                <div>{this.state.blog.createdAt}</div>
-                                <div>{`${this.state.blog.readTime.value} ${this.state.blog.readTime.unit} read`}</div>
+                                <div>
+                                    {new Date(this.state.blog.createdAt).toLocaleDateString()} - {new Date(this.state.blog.createdAt).toLocaleTimeString()}
+                                </div>
+                                <div>{`${this.state.blog.readTime.value} ${this.state.blog.readTime.unit}${this.state.blog.readTime.value > 1 ? "s" : ""} to read`}</div>
                             </div>
                         </div>
 

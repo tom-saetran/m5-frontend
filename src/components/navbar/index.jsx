@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Container, Navbar, Button } from "react-bootstrap"
+import { Container, Navbar, Button, Row } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import logo from "../../assets/logo.png"
 import "./styles.css"
@@ -12,12 +12,31 @@ export default class NavBar extends Component {
                         <img className="blog-navbar-brand" alt="logo" src={logo} />
                     </Navbar.Brand>
 
-                    <Button as={Link} to="/new" className="blog-navbar-add-button bg-dark" size="lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
-                            <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
-                        </svg>
-                        Post Article
-                    </Button>
+                    {this.props.signedin ? (
+                        <Button as={Link} to="/new" className="blog-navbar-add-button bg-dark" size="lg">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
+                                <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z" />
+                            </svg>
+                            Post Article
+                        </Button>
+                    ) : (
+                        <Row>
+                            <Button as={Link} to="/signup" className="blog-navbar-sign-button bg-dark me-2" size="lg">
+                                Sign Up!
+                            </Button>
+                            <Button
+                                as={Link}
+                                to="/"
+                                onClick={() => {
+                                    this.props.toggle()
+                                }}
+                                className="blog-navbar-sign-button bg-success"
+                                size="lg"
+                            >
+                                Sign In!
+                            </Button>
+                        </Row>
+                    )}
                 </Container>
             </Navbar>
         )
